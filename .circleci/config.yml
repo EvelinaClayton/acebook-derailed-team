@@ -1,17 +1,21 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/acebook-derailed-team
+
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.5.0
+      environment:
+        BUNDLER_VERSION: 1.17.3
 
     steps:
       - run:
-          name: Setup database
-          command: bin/rails db:schema:load --trace
+          name: Install ruby dependencies
+          command: gem install bundler && bundle install
 
       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
+          name: Setup database
+          command: bin/rails db:schema:load --trace
 
       - run:
           name: database migration
