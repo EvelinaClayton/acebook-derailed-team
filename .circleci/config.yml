@@ -4,14 +4,15 @@ jobs:
     working_directory: ~/acebook-derailed-team
 
     docker:
-      - image: circleci/ruby:2.5.0
+      image: circleci/ruby:2.5.0
       environment:
         BUNDLER_VERSION: 1.17.3
 
     steps:
       - run:
-          name: Install ruby dependencies
-          command: gem install bundler && bundle install
+        name: bundle install
+        command: |
+          bundle check --path vendor/bundle || bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - run:
           name: Setup database
