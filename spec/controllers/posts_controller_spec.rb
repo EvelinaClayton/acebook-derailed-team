@@ -7,8 +7,6 @@ RSpec.describe PostsController, type: :controller do
   describe 'GET /edit' do
     it 'render the edit post page' do
       post = FactoryBot.create(:post)
-      puts "user id of the post: #{post.user_id}"
-      puts "id of the post: #{post.id}"
       get :edit, params: { id: post.id }
       expect(response).to render_template(:edit)
     end
@@ -46,12 +44,35 @@ RSpec.describe PostsController, type: :controller do
       get :index
       expect(response).to have_http_status(200)
     end
-  end
 
-  describe 'GET /' do
     it 'renders the index page' do
       get :index
       expect(response).to render_template(:index)
+    end
+  end
+
+  describe "Destroy" do
+    it "can delete its own submitted post" do
+      post :create, params: { post: { message: "Hello, world!" } }
+      expect(Post.all.count).to eq 1
+
+      post_id = Post.all.first.id
+
+      delete :destroy, params: { id: post_id }
+      expect(Post.all.count).to eq 0
+    end
+
+    it "can't delete a post that doesn't belong to them" do
+      pending("Waiting for user being able to see other's posts")
+      post :create, params: { post: { message: "Hello, world!" } }
+      expect(Post.all.count).to eq 1
+      sign_out
+
+      post_id = Post.all.first.id
+
+      sign_in
+      delete :destroy, params: { id: post_id }
+      expect(Post.all.count).to eq 1
     end
   end
 end
