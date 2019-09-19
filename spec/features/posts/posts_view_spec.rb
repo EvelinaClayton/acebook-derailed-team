@@ -36,7 +36,19 @@ RSpec.feature 'Post', type: :feature do
       click_link 'Delete'
       expect(page).not_to have_content('Delete me!')
     end
+
+    scenario "Post's cannot be deleted by other users" do
+      visit '/posts'
+      click_link 'New post'
+      fill_in 'Message', with: 'message before edit'
+      click_button 'Submit'
+      click_button 'Sign out'
+      sign_up_with('anotherEmail@Email.com', 'password')
+      click_link 'Delete'
+      expect(page).to have_content("You don't own this post. Cannot be deleted.")
+    end
   end
+
   context 'User logs in' do
     scenario 'User sees a successful login message on login' do
       expect(page).to have_content 'You have successfully logged in.'
