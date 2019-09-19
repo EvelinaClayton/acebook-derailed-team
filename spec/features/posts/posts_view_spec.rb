@@ -72,5 +72,18 @@ RSpec.feature 'Post', type: :feature do
       page.reset!
       expect(page).not_to have_link 'Edit'
     end
+
+    scenario 'Post\'s cannot be edited by other users' do
+      visit '/posts'
+      click_link 'New post'
+      fill_in 'Message', with: 'message before edit'
+      click_button 'Submit'
+      click_button 'Sign out'
+      sign_up_with('anotherEmail@Email.com', 'password')
+      click_link 'Edit'
+      fill_in 'Message', with: 'message after edit'
+      click_button 'Submit'
+      expect(page).to have_content("You can't edit another user's post!")
+    end
   end
 end

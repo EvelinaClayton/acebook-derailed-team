@@ -63,7 +63,6 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it "can't delete a post that doesn't belong to them" do
-      pending("Waiting for user being able to see other's posts")
       post :create, params: { post: { message: "Hello, world!" } }
       expect(Post.all.count).to eq 1
       sign_out
@@ -74,6 +73,24 @@ RSpec.describe PostsController, type: :controller do
       delete :destroy, params: { id: post_id }
       expect(Post.all.count).to eq 1
     end
+
+    describe "Edit" do
+      it "can edit its own submitted post" do
+        post :create, params: { post: { message: "Hello, world!" } }
+        expect(Post.all.count).to eq 1
+        post_id = Post.all.first.id
+        patch :update, params: { id: post_id, post: { message: 'random message' } }
+        expect(Post.all.first.message).to eq('random message')
+      end
+      it "can't edit a post that doesn't belong to them" do
+        post :create, params: { post: { message: "Hello, world!" } }
+        expect(Post.all.count).to eq 1
+        sign_out
+        post_id = Post.all.first.id
+        sign_in
+        patch :update, params: { id: post_id, post: { message: 'random message' } }
+        expect(Post.all.first.message).to eq("Hello, world!")
+      end
+    end
   end
 end
-

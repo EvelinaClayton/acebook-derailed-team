@@ -24,12 +24,12 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.user_id == current_user.id
-    edit_timeout_error unless @post.can_edit?
-    @post.update(post_params)
-    else 
+      edit_timeout_error unless @post.can_edit?
+      @post.update(post_params)
+    else
       flash[:error] = "You can't edit another user's post!"
     end
-      redirect_to posts_path
+    redirect_to posts_path
   end
 
   def destroy
