@@ -36,10 +36,7 @@ RSpec.feature 'Post', type: :feature do
       click_link 'Delete'
       expect(page).not_to have_content('Delete me!')
     end
-
-    scenario "User cannot delete other user's posts"
   end
-
   context 'User logs in' do
     scenario 'User sees a successful login message on login' do
       expect(page).to have_content 'You have successfully logged in.'
@@ -75,7 +72,5 @@ RSpec.feature 'Post', type: :feature do
       page.reset!
       expect(page).not_to have_link 'Edit'
     end
-
-    scenario "User cannot edit other user's posts"
   end
 end
