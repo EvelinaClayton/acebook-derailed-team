@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   end
 
   post 'users/create'
+  get 'users/show'
   root 'posts#index'
 end
