@@ -20,6 +20,10 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def edit
     session[:return_to] = request.referer
     @post = Post.find(params[:id])
