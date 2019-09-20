@@ -10,7 +10,7 @@
       <p><%= line %></p>
     <% end %>
 
-    <p>Created At: <%= post.created_at %></p>
+    <p>Created by <%=post.user.username%> At: <%= post.created_at %></p>
 
     <% if post.created_at != post.updated_at %>
       <p>Last Updated : <%= post.updated_at %></p>
@@ -29,3 +29,11 @@
     </p>
   </div>
 <% end %>
+
+<div>
+  <%= link_to 'Go to my wall', user_wall_url(@current_user.id)%>
+</div>
+
+<div>
+  <%= link_to 'Show all users', users_show_path%>
+</div>

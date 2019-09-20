@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   def index
     session[:host_user_id] = current_user.id
     @user = User.find(current_user.id)
+    @current_user = current_user
     @posts = Post.all
   end
 
