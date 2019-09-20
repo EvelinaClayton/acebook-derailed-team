@@ -17,6 +17,7 @@
     <% end %>
 
     <p>
+    <%= link_to 'View Post', post_path(post) %>
     <% if post.can_edit? %>
       <%= link_to 'Edit', edit_post_path(post)%>
     <% end %>
