@@ -14,6 +14,8 @@ RSpec.feature 'Comment', type: :feature do
     expect(page).to have_content('Hello, world!')
     click_link 'View Post'
     expect(page).to have_content('Add a comment')
-    click_link 'Submit'
+    fill_in 'comment[body]', with: 'Comment number 1'
+    click_button 'Submit'
+    expect(page).to have_content('Comment number 1')
   end
 end
