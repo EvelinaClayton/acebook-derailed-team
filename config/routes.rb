@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resource :password,
              controller: "clearance/passwords",
              only: [:create, :edit, :update]
+
+    get 'wall', to: 'wall#index'
   end
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
@@ -18,8 +20,6 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  get 'posts/index'
   post 'users/create'
-
   root 'posts#index'
 end
