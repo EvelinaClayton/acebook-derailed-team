@@ -16,6 +16,10 @@ class PostsController < ApplicationController
     @user = current_user
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def edit
     @post = Post.find(params[:id])
     edit_timeout_error unless @post.can_edit?

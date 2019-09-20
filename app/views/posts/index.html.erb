@@ -9,7 +9,7 @@
     <% post.lines.each do | line | %>
       <p><%= line %></p>
     <% end %>
-    
+
     <p>Created At: <%= post.created_at %></p>
 
     <% if post.created_at != post.updated_at %>
@@ -17,6 +17,7 @@
     <% end %>
 
     <p>
+    <%= link_to 'View Post', post_path(post) %>
     <% if post.can_edit? %>
       <%= link_to 'Edit', edit_post_path(post)%>
     <% end %>
