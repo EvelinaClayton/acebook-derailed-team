@@ -1,0 +1,27 @@
+<h2>
+<% @post.lines.each do | line | %>
+  <p><%= line %></p>
+<% end %>
+</h2>
+
+<% if @post.can_edit? %>
+<%= link_to 'Edit', edit_post_path(@post)%>
+<% end %>
+
+<h3>Comments</h3>
+<% @post.comments.each do |comment| %>
+  <p>
+    <%= comment.body %>
+    <br>
+    Created At: <%= comment.created_at %>
+  </p>
+<% end %>
+
+<h3>Add a comment:</h3>
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <%= form.label :body %>
+  <%= form.text_area :body %>
+  <%= form.submit 'Submit'%>
+<% end %>
+
+<%= link_to 'All Posts', posts_path %>
