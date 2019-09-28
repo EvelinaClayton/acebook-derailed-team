@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20190919125529) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
-  add_foreign_key "comments", "posts"
   create_table "walls", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -53,6 +52,7 @@ ActiveRecord::Schema.define(version: 20190919125529) do
     t.index ["user_id"], name: "index_walls_on_user_id"
   end
 
+  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "users"
   add_foreign_key "posts", "walls"
   add_foreign_key "walls", "users"

@@ -1,20 +1,16 @@
-# <!DOCTYPE html>
-# <html lang="en">
-# <head>
-#     <title>Bootstrap Theme Company</title>
-#     <meta charset="utf-8">
-#     <meta name="viewport" content="width=device-width, initial-scale=1">
-#   </head>
-#   <body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Theme Company</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
-  
-# <h1>Company</h1> 
-# <p>We specialize in blablabla</p> 
+</html>
 
-# </body>
-# </html>
-
-<h1> Create a post here ! </h1>
+<h1>All posts
+  <br>Create a post here !
+</h1>
 <%= link_to new_post_path do %>
   New post
 <% end %>
@@ -25,7 +21,7 @@
       <p><%= line %></p>
     <% end %>
 
-    <p>Created by <%=post.user.username%> At: <%= post.created_at %></p>
+
 
     <% if post.created_at != post.updated_at %>
       <p>Last Updated : <%= post.updated_at %></p>
