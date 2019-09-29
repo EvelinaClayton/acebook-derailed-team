@@ -1,21 +1,52 @@
-<%= form_for :session, url: session_path do |form| %>
-  <div class="text-field">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
-  </div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
-  <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
 
-  <div class="submit-field">
-    <%= form.submit %>
-  </div>
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
 
-  <div class="other-links">
-    <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t(".sign_up"), sign_up_path %>
-    <% end %>
-  </div>
-<% end %>
+</style>
+</head>
+<body>
+  <%= form_for :session, url: session_path do |form| %>
+    <div class="input-container">
+      <i class="fa fa-envelope icon"></i>
+      <%= form.text_field :email, type: 'email' %>
+    </div>
+
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <%= form.password_field :password %>
+    </div>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <div class="other-links">
+      <% if Clearance.configuration.allow_sign_up? %>
+        <%= link_to t(".sign_up"), sign_up_path %>
+      <% end %>
+    </div>
+  <% end %>
+
+</body>
+</html>

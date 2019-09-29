@@ -22,8 +22,6 @@ Acebook is a simplified version of Facebook, so far it has the following feature
 
 * Existing posts can only be edited within 10 minutes after creation
 
-## Features we are working on:
-
 * Password validation during signing up
 
 ## Quickstart

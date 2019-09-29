@@ -140,6 +140,9 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
+Style/DoubleNegation:
+  Enabled: false
+
 # Offense count: 25
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
@@ -156,3 +159,4 @@ Metrics/BlockLength:
     - 'spec/models/*' 
     - 'spec/features/posts/*' 
     - 'spec/views/*' 
+    - 'spec/views/posts/*'
