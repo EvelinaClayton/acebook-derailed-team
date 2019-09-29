@@ -17,15 +17,13 @@
     <% end %>
 
     <p>
-    <%= link_to 'View Post', post_path(post) %>
-    <% if post.can_edit? %>
+    <% if post.can_edit?  %>
       <%= link_to 'Edit', edit_post_path(post)%>
-    <% end %>
-    <% if post.user_id == @user.id %>
       <%= link_to 'Delete', post_path(post),
-          method: :delete,
-          data: { confirm: 'Are you sure?' } %>
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %>
     <% end %>
+
     </p>
   </div>
 <% end %>

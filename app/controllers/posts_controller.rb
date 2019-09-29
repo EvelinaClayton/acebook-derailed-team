@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     @user = User.find(current_user.id)
     @current_user = current_user
     @posts = Post.all
+    @user = current_user
   end
 
   def show
@@ -33,9 +34,12 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    edit_timeout_error unless @post.can_edit?
-    @post.update(post_params)
-    # redirect_to posts_path
+    if @post.user_id == current_user.id
+      edit_timeout_error unless @post.can_edit?
+      @post.update(post_params)
+    else
+      flash[:error] = "You can't edit another user's post!"
+    end
     redirect_to session.delete(:return_to)
   end
 
